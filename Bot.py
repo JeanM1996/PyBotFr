@@ -4,14 +4,13 @@ from flask import Flask, request
 
 import telebot
 
-TOKEN = '{os.environ["telekey"]}'
 bot = telebot.TeleBot(TOKEN)
 server = Flask(__name__)
 
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.reply_to(message, 'Hello, ' + message.from_user.first_name)
+    bot.reply_to(message, 'Hola, ' + message.from_user.first_name)
 
 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
@@ -28,7 +27,7 @@ def getMessage():
 @server.route("/")
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url='{os.environ["herokuurl"]}' + TOKEN)
+    bot.set_webhook(url='{os.environ["herokuurl"]}'+'{os.environ["telekey"]}')
     return "!", 200
 
 
