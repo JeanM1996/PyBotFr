@@ -4,7 +4,7 @@ from flask import Flask, request
 
 import telebot
 
-bot = telebot.TeleBot(TOKEN)
+bot = telebot.TeleBot('{os.environ["telekey"]}')
 server = Flask(__name__)
 
 
