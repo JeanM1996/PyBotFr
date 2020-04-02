@@ -5,6 +5,7 @@ from flask import Flask, request
 import telebot
 
 TOKEN = os.environ["telekey"]
+URLHe = os.environ["herokuurl"]
 print("HOLa")
 print(TOKEN)
 bot = telebot.TeleBot(TOKEN)
@@ -30,7 +31,7 @@ def getMessage():
 @server.route("/")
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url='{os.environ["herokuurl"]}'+TOKEN)
+    bot.set_webhook(url=URLHe+TOKEN)
     return "!", 200
 
 
