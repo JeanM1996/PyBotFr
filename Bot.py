@@ -13,7 +13,7 @@ server = Flask(__name__)
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.reply_to(message, 'Hello, ' + message.from_user.first_name)
+    bot.reply_to(message, 'Hola, ' + message.from_user.first_name)
 
 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
@@ -21,7 +21,7 @@ def echo_message(message):
     bot.reply_to(message, message.text)
 
 
-@server.route('/' + TOKEN, methods=['POST'])
+@server.route('/'+TOKEN, methods=['POST'])
 def getMessage():
     bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
     return "!", 200
@@ -30,7 +30,7 @@ def getMessage():
 @server.route("/")
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url='{os.environ["herokuurl"]}' + TOKEN)
+    bot.set_webhook(url='{os.environ["herokuurl"]}'+TOKEN)
     return "!", 200
 
 
